@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './app_screens/first_screen.dart';
+import './app_screens/home.dart';
 
 void main() => runApp(MyFlutterApp());
 
@@ -9,8 +9,6 @@ class MyFlutterApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "My Flutter App",
-        home: Scaffold(
-            appBar: AppBar(title: Text("My First App Screen")),
-            body: FirstScreen()));
+        home: Home());
   }
 }
