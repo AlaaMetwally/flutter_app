@@ -8,7 +8,29 @@ class MyFlutterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "My Flutter App",
-        home: Home());
+        title: "Exploring UI widgets",
+        home: Scaffold(body:getListView() ));
+  }
+
+  Widget getListView() {
+    var listView = ListView(
+      children: <Widget>[
+        ListTile(
+          leading: Icon(Icons.landscape),
+          title: Text("landscape"),
+          subtitle: Text("Beautiful View"),
+          trailing: Icon(Icons.wb_sunny),
+          onTap: () => debugPrint("landscape tapped"),),
+        ListTile(
+          leading: Icon(Icons.laptop_chromebook),
+          title: Text("Windows"),),
+        ListTile(
+          leading: Icon(Icons.phone),
+          title: Text("Phone"),),
+        Text("Yet another element in list"),
+        Container(color: Colors.red,height: 50.0,)
+      ],
+    );
+    return listView;
   }
 }
