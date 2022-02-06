@@ -1,53 +1,50 @@
-import 'package:flutter/material.dart';
-import './app_screens/home.dart';
+import "package:flutter/material.dart";
 
-void main() => runApp(MyFlutterApp());
+void main() {
+  runApp(MaterialApp(title: "Stateful App Example", home: FavoriteCity()));
+}
 
-class MyFlutterApp extends StatelessWidget {
+class FavoriteCity extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _FavoriteCity();
+  }
+}
+
+class _FavoriteCity extends State<FavoriteCity> {
+  String nameCity = '';
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Exploring UI widgets",
-        home: Scaffold(
-          body: getListView(),
-          appBar: AppBar(
-            title: Text("Long List View"),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => debugPrint("FAB clicked"),
-            child: Icon(Icons.add),
-            tooltip: 'Add one more Item',
-          ),
-        ));
-  }
-
-  List<String> getListElements() {
-    return List<String>.generate(20, (index) => "Item $index");
-  }
-
-  void showSnackBar(BuildContext context, String item) {
-    var snackBar = SnackBar(
-      content: Text("you just tapped item $item"),
-      action: SnackBarAction(
-        label: "UNDO",
-        onPressed: () => debugPrint('Performing dummy UNDO operation'),
+    debugPrint("Favorite City widget is created");
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Stateful App Example"),
+      ),
+      body: Container(
+        margin: EdgeInsets.all(20.0),
+        child: Column(
+          children: <Widget>[
+            TextField(
+              onSubmitted: (String userInput) {
+                setState(() {
+                  debugPrint(
+                      "set State is called, this tells framwork to redraw the FavCity widget");
+                  nameCity = userInput;
+                });
+              },
+            ),
+            Padding(
+              padding: EdgeInsets.all(30.0),
+              child: Text(
+                "Your text city is $nameCity",
+                style: TextStyle(fontSize: 20.0),
+              ),
+            )
+          ],
+        ),
       ),
     );
-    Scaffold.of(context).showSnackBar(snackBar);
-  }
-
-  Widget getListView() {
-    var listItems = getListElements();
-    var listView = ListView.builder(itemBuilder: (context, index) {
-      return ListTile(
-        leading: Icon(Icons.arrow_right),
-        title: Text(listItems[index]),
-        onTap: () {
-          showSnackBar(context, listItems[index]);
-        },
-      );
-    });
-    return listView;
   }
 }
