@@ -17,31 +17,21 @@ class MyFlutterApp extends StatelessWidget {
         ));
   }
 
+  List<String> getListElements() {
+    return List<String>.generate(20, (index) => "Item $index");
+  }
+
   Widget getListView() {
-    var listView = ListView(
-      children: <Widget>[
-        ListTile(
-          leading: Icon(Icons.landscape),
-          title: Text("landscape"),
-          subtitle: Text("Beautiful View"),
-          trailing: Icon(Icons.wb_sunny),
-          onTap: () => debugPrint("landscape tapped"),
-        ),
-        ListTile(
-          leading: Icon(Icons.laptop_chromebook),
-          title: Text("Windows"),
-        ),
-        ListTile(
-          leading: Icon(Icons.phone),
-          title: Text("Phone"),
-        ),
-    //    Text("Yet another element in list"),
-    //    Container(
-    //      color: Colors.red,
-    //      height: 50.0,
-    //    )
-      ],
-    );
+    var listItems = getListElements();
+    var listView = ListView.builder(itemBuilder: (context, index) {
+      return ListTile(
+        leading: Icon(Icons.arrow_right),
+        title: Text(listItems[index]),
+        onTap: () {
+          debugPrint('${listItems[index]} was tapped');
+        },
+      );
+    });
     return listView;
   }
 }
