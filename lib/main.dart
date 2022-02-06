@@ -9,7 +9,12 @@ class MyFlutterApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Exploring UI widgets",
-        home: Scaffold(body:getListView() ));
+        home: Scaffold(
+          body: getListView(),
+          appBar: AppBar(
+            title: Text("Basic List View"),
+          ),
+        ));
   }
 
   Widget getListView() {
@@ -20,15 +25,21 @@ class MyFlutterApp extends StatelessWidget {
           title: Text("landscape"),
           subtitle: Text("Beautiful View"),
           trailing: Icon(Icons.wb_sunny),
-          onTap: () => debugPrint("landscape tapped"),),
+          onTap: () => debugPrint("landscape tapped"),
+        ),
         ListTile(
           leading: Icon(Icons.laptop_chromebook),
-          title: Text("Windows"),),
+          title: Text("Windows"),
+        ),
         ListTile(
           leading: Icon(Icons.phone),
-          title: Text("Phone"),),
-        Text("Yet another element in list"),
-        Container(color: Colors.red,height: 50.0,)
+          title: Text("Phone"),
+        ),
+    //    Text("Yet another element in list"),
+    //    Container(
+    //      color: Colors.red,
+    //      height: 50.0,
+    //    )
       ],
     );
     return listView;
