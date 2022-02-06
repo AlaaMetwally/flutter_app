@@ -12,13 +12,29 @@ class MyFlutterApp extends StatelessWidget {
         home: Scaffold(
           body: getListView(),
           appBar: AppBar(
-            title: Text("Basic List View"),
+            title: Text("Long List View"),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => debugPrint("FAB clicked"),
+            child: Icon(Icons.add),
+            tooltip: 'Add one more Item',
           ),
         ));
   }
 
   List<String> getListElements() {
     return List<String>.generate(20, (index) => "Item $index");
+  }
+
+  void showSnackBar(BuildContext context, String item) {
+    var snackBar = SnackBar(
+      content: Text("you just tapped item $item"),
+      action: SnackBarAction(
+        label: "UNDO",
+        onPressed: () => debugPrint('Performing dummy UNDO operation'),
+      ),
+    );
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   Widget getListView() {
@@ -28,7 +44,7 @@ class MyFlutterApp extends StatelessWidget {
         leading: Icon(Icons.arrow_right),
         title: Text(listItems[index]),
         onTap: () {
-          debugPrint('${listItems[index]} was tapped');
+          showSnackBar(context, listItems[index]);
         },
       );
     });
