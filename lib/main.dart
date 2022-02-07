@@ -1,23 +1,28 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(title: "Stateful App Example", home: FavoriteCity()));
+  runApp(MaterialApp(
+    title: "Sateful App Example",
+    home: FavoriteCity(),
+  ));
 }
 
 class FavoriteCity extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _FavoriteCity();
+    return _FavoriteCityState();
   }
 }
 
-class _FavoriteCity extends State<FavoriteCity> {
-  String nameCity = '';
+class _FavoriteCityState extends State<FavoriteCity> {
+  String nameCity = "";
+  var _currencies = ['Rupees', 'Dollars', 'Pounds', 'Others'];
+  var _currentItemSelected = 'Dollars';
 
   @override
   Widget build(BuildContext context) {
     debugPrint("Favorite City widget is created");
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Stateful App Example"),
@@ -35,16 +40,34 @@ class _FavoriteCity extends State<FavoriteCity> {
                 });
               },
             ),
+            DropdownButton<String>(
+              items: _currencies.map((String dropDownStringItem) {
+                return DropdownMenuItem<String>(
+                  value: dropDownStringItem,
+                  child: Text(dropDownStringItem),
+                );
+              }).toList(),
+              onChanged: (var newValueSelected) {
+                // Your code to execute, when a menu item is selected from drop down
+                _onDropDownItemSelected(newValueSelected);
+              },
+              value: _currentItemSelected,
+            ),
             Padding(
-              padding: EdgeInsets.all(30.0),
-              child: Text(
-                "Your text city is $nameCity",
-                style: TextStyle(fontSize: 20.0),
-              ),
-            )
+                padding: EdgeInsets.all(30.0),
+                child: Text(
+                  "Your best city is $nameCity",
+                  style: TextStyle(fontSize: 20.0),
+                ))
           ],
         ),
       ),
     );
+  }
+
+  void _onDropDownItemSelected(var newValueSelected) {
+    setState(() {
+      this._currentItemSelected = newValueSelected;
+    });
   }
 }
